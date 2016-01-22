@@ -7,6 +7,8 @@ scalaVersion := "2.11.7"
 lazy val shadedPackageName = "shaded.com.example"
 
 lazy val shadeRules = Seq(
+  ShadeRule.rename(("java.**", "@0")).inAll,
+  ShadeRule.rename(("javax.**", "@0")).inAll,
   ShadeRule.rename(("com.example.**", "@0")).inProject,       // keep the package the same for internal code
   ShadeRule.rename(("*.**", shadedPackageName + ".@0")).inAll // move all dependencies to the shaded package
 )
